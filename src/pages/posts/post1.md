@@ -1,16 +1,14 @@
 ---
-title: 'Not My First Blog Post'
-publishDate: 2026-08-05
-description: 'This a post of my new Astro blog.'
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'My First Blog Post'
+publishDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: 'The Astro logo on a dark background with a pink glow.'
-tags: ["astro", "blog"]
+tags: ["astro", "blog", "learning in public"]
 ---
-## **Not** My First Blog Post
-
-Published on: 2026-08-05
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 

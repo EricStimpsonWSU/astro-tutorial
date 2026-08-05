@@ -22,5 +22,8 @@ const pageTitle = "Astro Learning Blog"
           <p>{p.data.description}</p>
         </li>
       ))}
+      <li><a href={`${import.meta.env.BASE_URL}/posts/post1`}>Post 1</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}/posts/post2`}>Post 2</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}/posts/post3`}>Post 3</a></li>
     </ul>
 </BaseLayout>
