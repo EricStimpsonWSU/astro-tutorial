@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BlogPost from '../components/BlogPost.astro';
 import '../styles/global.css';
 
 import { getCollection } from 'astro:content';
@@ -9,6 +8,7 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 const pageTitle = "Astro Learning Blog"
 ---
 
@@ -22,8 +22,7 @@ const pageTitle = "Astro Learning Blog"
           <p>{p.data.description}</p>
         </li>
       ))}
-      <li><a href={`${import.meta.env.BASE_URL}/posts/post1`}>Post 1</a></li>
-      <li><a href={`${import.meta.env.BASE_URL}/posts/post2`}>Post 2</a></li>
-      <li><a href={`${import.meta.env.BASE_URL}/posts/post3`}>Post 3</a></li>
+      <!-- {allPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)} -->
+      {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
     </ul>
 </BaseLayout>
