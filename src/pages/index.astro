@@ -14,11 +14,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 		<title>Astro</title>
 	</head>
   <body>
+    <a href={import.meta.env.BASE_URL}>Home</a>
+    <a href={`${import.meta.env.BASE_URL}/about`}>About</a>
+    <a href={`${import.meta.env.BASE_URL}/blog`}>Blog</a>
+
     <h1>Blog</h1>
     <ul>
       {posts.map((p) => (
         <li>
-          <a href={`${Astro.url}/blog/${p.id}`}>{p.data.title}</a>
+          <a href={`${import.meta.env.BASE_URL}/blog/${p.id}`}>{p.data.title}</a>
           <p>{p.data.description}</p>
         </li>
       ))}
