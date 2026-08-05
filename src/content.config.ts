@@ -8,7 +8,7 @@ const blog = defineCollection({
     description: z.string(),
     publishDate: z.coerce.date(),
     tags: z.array(z.enum([
-      'blog', 'formation', 'tutorial', 'astro', 'meta',
+      'blog', 'formation', 'tutorial', 'astro', 'meta', 'learning in public', 'successes', 'setbacks', 'community'
     ])).default(['blog']),
     draft: z.boolean().default(false),
   }),
