@@ -1,5 +1,6 @@
 ---
 import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const pageTitle = "About Me";
@@ -65,5 +66,7 @@ const textCase = "lowercase";
     {happy && <p>I am happy!</p>}
     {finished ? <p>I am finished with the tutorial.</p> : <p>I am not finished with the tutorial.</p>}
     {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not to finish in 3 days.</p>}
+
+    <Footer />
   </body>
 </html>
