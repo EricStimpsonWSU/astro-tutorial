@@ -7,15 +7,14 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 
+import preact from "@astrojs/preact";
+
 export default defineConfig({
   site: "https://ericstimpsonwsu.github.io",
   base: "/astro-tutorial/",
   trailingSlash: "never",
 
-  integrations: [
-    mdx(),
-    sitemap(),
-  ],
+  integrations: [mdx(), sitemap(), preact()],
 
   markdown: {
     // ⭐ Your unified processor (math + katex + slug)
