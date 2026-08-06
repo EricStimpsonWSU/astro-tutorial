@@ -5,10 +5,11 @@ import '../styles/global.css';
 
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+// const posts = (await getCollection('blog', ({ data }) => !data.draft))
+//   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
-const allPosts = Object.values(import.meta.glob('./posts/*.{md,mdx}', { eager: true }));
+// const allPosts = Object.values(import.meta.glob('./posts/*.{md,mdx}', { eager: true }));
+const allPosts = await getCollection('blog');
 const pageTitle = "Astro Learning Blog"
 ---
 
@@ -16,13 +17,7 @@ const pageTitle = "Astro Learning Blog"
 
     <p>This is where I will post about my journey learning Astro.</p>
     <ul>
-      {posts.map((p) => (
-        <li>
-          <a href={`${import.meta.env.BASE_URL}/blog/${p.id}`}>{p.data.title}</a>
-          <p>{p.data.description}</p>
-        </li>
-      ))}
       <!-- {allPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)} -->
-      {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+      {allPosts.map((post: any) => <BlogPost url={`${import.meta.env.BASE_URL}/posts/${post.id}`} title={post.data.title} />)}
     </ul>
 </BaseLayout>
