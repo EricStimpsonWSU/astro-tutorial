@@ -1,46 +1,38 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 
-import rehypeSlug from 'rehype-slug';
-// import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-// import { remarkAlert } from 'remark-github-blockquote-alert';
+import { unified } from "@astrojs/markdown-remark";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeSlug from "rehype-slug";
 
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://ericstimpsonwsu.github.io',
-  trailingSlash: 'never',
-  base: '/astro-tutorial/',
-  integrations: [mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
-    }),
+  site: "https://ericstimpsonwsu.github.io",
+  base: "/astro-tutorial/",
+  trailingSlash: "never",
+
+  integrations: [
+    mdx(),
     sitemap(),
-    // pagefind(),
   ],
+
   markdown: {
-    shikiConfig: {
-      // remarkPlugins: [remarkMath],
+    // ⭐ Your unified processor (math + katex + slug)
+    processor: unified({
+      remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeSlug, rehypeKatex],
-      themes: { light: 'github-light', dark: 'github-dark-dimmed' },
-      defaultColor: false,
+    }),
+
+    // ⭐ The correct way to enable syntax highlighting
+    syntaxHighlight: "shiki",   // ← THIS restores highlighting
+
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark-dimmed",
+      },
       wrap: true,
     },
-    // remarkPlugins: [remarkAlert],
-    rehypePlugins: [
-      rehypeSlug,
-      // [
-      //   rehypeAutolinkHeadings,
-      //   {
-      //     behavior: 'append',
-      //     properties: { className: ['heading-anchor'], 'aria-label': 'Link to this section' },
-      //     content: { type: 'text', value: '#' },
-      //   },
-      // ],
-    ],
   },
 });
